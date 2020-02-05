@@ -1,44 +1,23 @@
-const questionsData = [
-{
-	question: "Что такое Арабика?",
-	answers: ["Имя моей подруги", "Разновидность кофейного дерева", "Способ приготовления Кофе", "Регион произрастания Кофе"],
-	answerTrue: 1
-},
-{
-	question: "Чем отличается капучино от латте?",
-	answers: ["Это одно и то же", "Размером", "Соотношением Кофе и молока", "Капучино вкуснее"],
-	answerTrue: 2
-},
-{
-	question: "Что вы знаете о Пуровере?",
-	answers: ["Это то, что на мне надето", "Это сорт Кофе", "Название известной кофейни", "Способ заваривания кофе"],
-	answerTrue: 3
-},
-{
-	question: "Какой регион считается самым крупным поставщиком Кофе в мире?",
-	answers: ["Бразилия", "Эфиопия", "Мексика", "Перу"],
-	answerTrue: 0
-},
-{
-	question: "Какой напиток придумали в Москве?",
-	answers: ["Латте", "Американо", "Флэт Уайт", "Раф"],
-	answerTrue: 3
-}
-];
+// get questionsAndAnswers
+let questionsAndAnswers;
+let questionsAndAnswersData = [];
 
-// get data
-// fetch("./data.json")
-// .then(res => {
-// })
-// .catch(err => {
-// });
+fetch("http://coffee-doubleb.github.io/quiz/questions-and-answers-data.json")
 
-if (window.File && window.FileReader && window.FileList && window.Blob) {
-  // Great success! All the File APIs are supported.
-  console.log(window.File);
-} else {
-  alert('The File APIs are not fully supported in this browser.');
-}
+.then(response => {
+	return response.json();
+})
+
+.then(data => {
+	questionsAndAnswersData = data;
+	quiz();
+})
+
+.catch(error => {
+	console.log(error);
+});
+
+
 // message
 const message = document.querySelector(".message");
 const messageContent = document.querySelector(".message__content");
@@ -109,6 +88,8 @@ const quiz = () => {
 	document.querySelector(".card__content").style.display = "block";
 	document.querySelector(".quiz__btn--start").style.display = "none";
 
+	questionsAndAnswers = [...questionsAndAnswersData];
+
 	createQuestion();
 }
 
@@ -165,7 +146,7 @@ const createQuestion = () => {
 		document.querySelector(".quiz__item").remove();
 	}
 
-	if (numberQuestion < questionsData.length){
+	if (numberQuestion < questionsAndAnswers.length){
 		quizContent.append(createQuizItem(numberQuestion));
 
 		if (!(isNaN(selectAnswer[numberQuestion]))){
@@ -204,13 +185,13 @@ createQuizItem = (index) => {
 
 	quizItem.insertAdjacentElement("beforeend", quizList);
 
-	for (let i = 0; i < questionsData[index].answers.length; i++){
-		let quizListItem = "<li class='quiz__option'><input class='quiz__input' type='radio' name='answer' value=" + i + " id=" + i + "><label class='quiz__label' for=" + i + "><span class='quiz__radio'></span><span class='answer__text'>" + questionsData[index].answers[i] + "</span></li>";
+	for (let i = 0; i < questionsAndAnswers[index].answers.length; i++){
+		let quizListItem = "<li class='quiz__option'><input class='quiz__input' type='radio' name='answer' value=" + i + " id=" + i + "><label class='quiz__label' for=" + i + "><span class='quiz__radio'></span><span class='answer__text'>" + questionsAndAnswers[index].answers[i] + "</span></li>";
 
 		quizList.insertAdjacentHTML("afterbegin", `${quizListItem}`);
 	}
 
-	quizItem.insertAdjacentHTML("afterbegin", `<h1 class="quiz__title">Вопрос № ${(index + 1)}</h1><p class="quiz__question">${questionsData[index].question}</p>`);
+	quizItem.insertAdjacentHTML("afterbegin", `<h1 class="quiz__title">Вопрос № ${(index + 1)}</h1><p class="quiz__question">${questionsAndAnswers[index].question}</p>`);
 
 	return quizItem;
 }
@@ -226,7 +207,7 @@ function displayResult() {
 	let correctAnswers = 0;
 
 	for (let i = 0; i < selectAnswer.length; i++){
-		if (selectAnswer[i] === questionsData[i].answerTrue) {
+		if (selectAnswer[i] === questionsAndAnswers[i].answerTrue) {
 			correctAnswers++;
 		}
 	}
@@ -237,7 +218,7 @@ function displayResult() {
 	total.className = "total";
 	quizContent.append(total);
 
-	const couponData = [
+	const coupons = [
 	{
 		coupon: "DB64699",
 		sale: "5% скидка"
@@ -254,20 +235,20 @@ function displayResult() {
 
 	const displayCoupon = () => {
 		if (correctAnswers == 2){
-			coupon = couponData[0].coupon;
-			sale = couponData[0].sale;
+			coupon = coupons[0].coupon;
+			sale = coupons[0].sale;
 		} else if (correctAnswers == 3){
-			coupon = couponData[1].coupon;
-			sale = couponData[1].sale;
+			coupon = coupons[1].coupon;
+			sale = coupons[1].sale;
 		} else if (correctAnswers == 4 || correctAnswers == 5){
-			coupon = couponData[2].coupon;
-			sale = couponData[2].sale;
+			coupon = coupons[2].coupon;
+			sale = coupons[2].sale;
 		} else {
 			coupon = "Пусто";
 			sale = "Нет скидки, т.к. вы не набрали минимальное (3) количество правильных ответов";
 		}
 
-		total.insertAdjacentHTML("afterbegin", "<span class='total__score'>Вы набрали "+correctAnswers+" из "+questionsData.length+"</span><span class='total__title'>"+valueFormName+", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>"+sale+"</span><b class='coupon__code'>"+coupon+"</b><svg height='12px'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)' /></svg></div>");
+		total.insertAdjacentHTML("afterbegin", "<span class='total__score'>Вы набрали "+correctAnswers+" из "+questionsAndAnswers.length+"</span><span class='total__title'>"+valueFormName+", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>"+sale+"</span><b class='coupon__code'>"+coupon+"</b><svg height='12px'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)' /></svg></div>");
 	}
 
 	showCoffeeMachine();
