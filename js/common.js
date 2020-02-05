@@ -10,7 +10,6 @@ fetch("https://coffee-doubleb.github.io/quiz/questions-and-answers-data.json")
 
 .then(data => {
 	questionsAndAnswersData = data;
-	quiz();
 })
 
 .catch(error => {
