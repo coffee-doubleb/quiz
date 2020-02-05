@@ -311,6 +311,34 @@
 	z-index: 2;
 }
 
+.card__title{
+	margin: 0 0 20px 0;
+	font-size: 2.5em;
+	color: #495057;
+	text-align: center;
+}
+
+.card__title::before,
+.card__title::after {
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 7px;
+	height: 7px;
+	background-color: #5EBEBE;
+	border-radius: 30px;
+	content: "";
+}
+
+.card__title::before {
+	margin-right: 7px;
+}
+
+.card__title::after {
+	margin-left: 7px;
+}
+
 /* card__preview */
 
 @-webkit-keyframes cardPreviewFadeIn {
