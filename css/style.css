@@ -316,7 +316,6 @@
 	font-size: 2.5em;
 	color: #495057;
 	text-align: center;
-	background-color: transparent;
 }
 
 .card__title::before,
@@ -371,6 +370,7 @@
 }
 
 .card__preview{
+	position: relative;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -382,11 +382,10 @@
 	-ms-flex-align: center;
 	align-items: center;
 	padding: 0 10px;
-	background-color: #FFFFFF;
 	opacity: 0;
 	-webkit-animation: cardPreviewFadeIn 0.8s 1.4s forwards;
 	animation: cardPreviewFadeIn 0.8s 1.4s forwards;
-	position: relative;
+	background-color: transparent;
 }
 
 .card__info{
