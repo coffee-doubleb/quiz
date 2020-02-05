@@ -5,10 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="theme-color" content="#5EBEBE">
+		<meta name="description" content="Даблби, кофейня, кофе, опрос для получения купона">
 		<title>Даблби - Опрос для получения купона</title>
+		<link rel="shortcut icon" href="img/favicon.png">
 		<!-- critical css -->
 		<style>html,body{height:100%;}body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin:0;font-family:"Catorze27style1",sans-serif;line-height:1;background-color:#A9A9A9;background:-o-linear-gradient(top,#FFFFFF,#5EBEBE);background:-webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#5EBEBE));background:linear-gradient(to bottom,#FFFFFF,#5EBEBE);overflow:hidden;}.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:flex-end;width:100%;height:97%;margin:0 10px;background-color:#FFFFFF;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:6px;-webkit-box-shadow:0 0.25rem 0.25rem rgba(0,0,0,0.2),0 0 1rem rgba(0,0,0,0.2);box-shadow:0 0.25rem 0.25rem rgba(0,0,0,0.2),0 0 1rem rgba(0,0,0,0.2);overflow: hidden;}@media(min-width:568px){.card{width:400px;}@media(max-width:320px){.card{height:500px;}</style>
-		<link rel="shortcut icon" href="img/favicon.png">
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
@@ -16,7 +17,7 @@
 		<div class="message" data-notification-status="plain" role="alert" aria-live="assertive">
 			<svg class="message__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 301.691 301.691" fill="#FFFFFF"><g><polygon points="119.151,0 129.6,218.406 172.06,218.406 182.54,0"></polygon><rect x="130" y="261" width="40" height="40"></rect></g></svg>
 			<p class="message__content"></p>
-			<button class="message__close"><svg fill="#A9A9A9" viewBox="0 0 15.642 15.642"><path d="M8.882,7.821l6.541-6.541c0.293-0.293,0.293-0.768,0-1.061 c-0.293-0.293-0.768-0.293-1.061,0L7.821,6.76L1.28,0.22c-0.293-0.293-0.768-0.293-1.061,0c-0.293,0.293-0.293,0.768,0,1.061 l6.541,6.541L0.22,14.362c-0.293,0.293-0.293,0.768,0,1.061c0.147,0.146,0.338,0.22,0.53,0.22s0.384-0.073,0.53-0.22l6.541-6.541 l6.541,6.541c0.147,0.146,0.338,0.22,0.53,0.22c0.192,0,0.384-0.073,0.53-0.22c0.293-0.293,0.293-0.768,0-1.061L8.882,7.821z"></path></svg></button>
+			<button class="message__close" aria-label="Закрыть сообщение"><svg fill="#A9A9A9" viewBox="0 0 15.642 15.642"><path d="M8.882,7.821l6.541-6.541c0.293-0.293,0.293-0.768,0-1.061 c-0.293-0.293-0.768-0.293-1.061,0L7.821,6.76L1.28,0.22c-0.293-0.293-0.768-0.293-1.061,0c-0.293,0.293-0.293,0.768,0,1.061 l6.541,6.541L0.22,14.362c-0.293,0.293-0.293,0.768,0,1.061c0.147,0.146,0.338,0.22,0.53,0.22s0.384-0.073,0.53-0.22l6.541-6.541 l6.541,6.541c0.147,0.146,0.338,0.22,0.53,0.22c0.192,0,0.384-0.073,0.53-0.22c0.293-0.293,0.293-0.768,0-1.061L8.882,7.821z"></path></svg></button>
 		</div>
 		<!-- card -->
 		<section class="card">
@@ -33,16 +34,16 @@
 					</div>
 					<div class="form__field">
 						<span class="form__prefix">+7</span>
-						<input class="form__input form__phone" id="phone" type="tel" required name="phone" placeholder="(000) 000-00-00">
+						<input class="form__input form__phone" id="phone" type="tel" placeholder="(000) 000-00-00" required>
 						<label class="form__label" for="phone"></label>
 					</div>
 					<label class="form__check check">
 						<input class="check__input form__checkbox" type="checkbox">
 						<span class="check__checkbox"></span>
-						<span class="check__text">Согласны с <a class="form__agreement" href="documents/agreement.pdf" target="_blank">конфиденциальностью</a> & <a class="form__agreement" href="documents/agreement.pdf" target="_blank">соглашением</a>?</span>
+						<span class="check__text">Согласны с <a class="form__agreement" href="documents/agreement.pdf" target="_blank">конфиденциальностью</a> & <a class="form__agreement" href="documents/agreement.pdf" target="_blank">правилами</a>?</span>
 					</label>
 				</form>
-				<button type="submit" class="btn quiz__btn--start">Начать</button>
+				<button class="btn quiz__btn--start" type="submit">Начать</button>
 			</div>
 			<div class="card__content">
 				<!-- quiz -->
