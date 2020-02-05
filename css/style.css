@@ -431,13 +431,13 @@
 	padding: 0 5px;
 	font-size: 1.2em;
 	background-color: #FFFFFF;
-	opacity: 0.5;
 	-webkit-transform: scale(1) translate(0, 7px);
 	-ms-transform: scale(1) translate(0, 7px);
 	transform: scale(1) translate(0, 7px);
 	-webkit-transition: 0.2s;
 	-o-transition: 0.2s;
 	transition: 0.2s;
+	color: #757575;
 }
 
 .form__input{
@@ -447,9 +447,7 @@
 	padding: 7px 10px;
 	font-family: "Catorze27style1";
 	font-size: 1em;
-	color: #495057;
 	background-color: #FFFFFF;
-	background-image: none;
 	border: 2px solid #757575;
 	border-radius: 3px;
 	-webkit-box-sizing: border-box;
@@ -460,6 +458,7 @@
 	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	color: #757575;
 }
 
 .form__input:focus,
@@ -480,7 +479,7 @@
 	color: #757575;
 	border: 2px solid #757575;
 	border-right: 0;
-	border-radius: 4px 0 0 4px;
+	border-radius: 3px 0 0 3px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -547,7 +546,7 @@
 	height: 5px;
 	margin: -2.5px 0 0 -2.5px;
 	background-color: #5EBEBE;
-	border-radius: 2.5px;
+	border-radius: 3px;
 	content: "";
 }
 
