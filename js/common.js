@@ -2,7 +2,7 @@
 let questionsAndAnswers;
 let questionsAndAnswersData = [];
 
-fetch("http://coffee-doubleb.github.io/quiz/questions-and-answers-data.json")
+fetch("https://coffee-doubleb.github.io/quiz/questions-and-answers-data.json")
 
 .then(response => {
 	return response.json();
