@@ -6,7 +6,7 @@
 	font-display: swap;
 }
 
-/* btns */
+/* btn */
 
 .btn {
 	display: inline-block;
@@ -125,7 +125,7 @@
 	color: #757575;
 }
 
-.message__close {
+.message--close {
 	position: absolute;
 	right: 25px;
 	cursor: pointer;
@@ -133,9 +133,6 @@
 	height: 30px;
 	background: transparent;
 	border: none;
-	-o-transition: 0.2s cubic-bezier(0.175, 0.885, 0.52, 1.775);
-	-webkit-transition: 0.2s cubic-bezier(0.175, 0.885, 0.52, 1.775);
-	transition: 0.2s cubic-bezier(0.175, 0.885, 0.52, 1.775);
 	outline: none;
 }
 
@@ -253,7 +250,7 @@
 	animation: cardLogoFadeIn 0.8s 1.4s forwards;
 }
 
-.card__svg {
+.card__bend {
 	position: absolute;
 	top: 20px;
 }
@@ -474,7 +471,7 @@
 	transform: scale(0.8) translate(-5px, -15px);
 }
 
-.form__prefix{
+.form__code{
 	padding: 7px;
 	color: #757575;
 	border: 2px solid #757575;
@@ -499,46 +496,14 @@
 	left: 35px;
 }
 
-/* form__check */
-
-.form__check{
-	margin-left: 2px;
-}
-
-.check__input{
+.form__checkbox{
 	position: absolute;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 }
 
-.check__input:focus + .check__checkbox{
-	outline: none;
-	-webkit-box-shadow: 0 0 0 2px #000000;
-	box-shadow: 0 0 0 2px #000000;
-}
-
-.check__checkbox{
-	position: absolute;
-	width: 15px;
-	height: 15px;
-	margin-top: 2px;
-	overflow: hidden;
-	border-radius: 3px;
-	background-color: #FFFFFF;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	-webkit-box-shadow: 0 0 0 0.1em #5EBEBE;
-	box-shadow: 0 0 0 0.1em #5EBEBE;
-	cursor: pointer;
-}
-
-.check__input:checked + .check__checkbox{
-	background-color: #5EBEBE;
-	background-image: url("../img/check.svg");
-}
-
-.check__input:hover .check__checkbox::after {
+.form__checkbox:hover .form__custom-checkbox::after {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -550,18 +515,40 @@
 	content: "";
 }
 
-.check__text{
+.form__checkbox:checked + .form__custom-checkbox{
+	border: 1px solid #FFFFFF;
+	background-color: #5EBEBE;
+	background-image: url("../img/check.svg");
+}
+
+.form__checkbox:focus + .form__custom-checkbox{
+	outline: none;
+	-webkit-box-shadow: 0 0 0 2px #000000;
+	box-shadow: 0 0 0 2px #000000;
+}
+
+.form__custom-checkbox{
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	margin: 2px 0 0 2px;
+	overflow: hidden;
+	border-radius: 3px;
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	-webkit-box-shadow: 0 0 0 0.1em #5EBEBE;
+	box-shadow: 0 0 0 0.1em #5EBEBE;
+	cursor: pointer;
+}
+
+.form__question{
 	display: inline-block;
 	margin-left: 25px;
 	cursor: pointer;
 }
 
-.check__input:checked + .form__check > .check__checkbox{
-	background: url("../img/check.svg") #5EBEBE;
-	border: 1px solid #FFFFFF;
-}
-
-.form__agreement{
+.form__link{
 	display: inline-block;
 	color: #5EBEBE;
 	text-decoration: none;
@@ -569,7 +556,7 @@
 	box-shadow: 0 2px 0 0 #5EBEBE;
 }
 
-.form__agreement:hover{
+.form__link:hover{
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
@@ -584,7 +571,7 @@
 	margin-bottom: 15px;
 }
 
-@-webkit-keyframes fade-out{
+@-webkit-keyframes quizContentFadeOut{
 	from{
 		opacity: 0;
 	}
@@ -594,7 +581,7 @@
 	}
 }
 
-@keyframes fade-out{
+@keyframes quizContentFadeOut{
 	from{
 		opacity: 0;
 	}
@@ -605,8 +592,8 @@
 }
 
 .quiz__content--fade-out{
-	-webkit-animation: 1s fade-out forwards;
-	animation: 1s fade-out forwards;
+	-webkit-animation: 1s quizContentFadeOut forwards;
+	animation: 1s quizContentFadeOut forwards;
 }
 
 .quiz__item{
@@ -728,10 +715,12 @@
 	content: "";
 }
 
-.quiz__input:checked + label > .quiz__radio {
+.quiz__input:checked + .quiz__label > .quiz__radio {
 	background: url("../img/check.svg") #5EBEBE;
 	border: 1px solid #FFFFFF;
 }
+
+/* quiz__btns */
 
 .quiz__btns {
 	display: -webkit-box;
@@ -763,9 +752,9 @@
 	transition: width 0.6s ease-in-out;
 }
 
-/* total */
+/* quiz__icon */
 
-.coffee-machine{
+.quiz__icon{
 	width: 100px;
 	height: 100px;
 	margin: 0 auto 15px auto;
@@ -773,8 +762,8 @@
 	position: relative;
 }
 
-.coffee-machine__left,
-.coffee-machine__right {
+.icon__cup,
+.icon__coffee-machine {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -792,12 +781,12 @@
 	transition: 1s ease-out;
 }
 
-.coffee-machine__left--active {
+.icon__cup--left {
 	-webkit-animation: showFormLeft 2s 0s forwards;
 	animation: showFormLeft 2s 0s forwards;
 }
 
-.coffee-machine__right--active{
+.icon__coffee-machine--right{
 	-webkit-animation: showFormRight 2s 0s forwards;
 	animation: showFormRight 2s 0s forwards;
 }

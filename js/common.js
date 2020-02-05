@@ -2,7 +2,7 @@
 let questionsAndAnswers;
 let questionsAndAnswersData = [];
 
-fetch("https://coffee-doubleb.github.io/quiz/questions-and-answers-data.json")
+fetch("https://doubleb-coffee.github.io/quiz/questions-and-answers.json")
 
 .then(response => {
 	return response.json();
@@ -16,11 +16,10 @@ fetch("https://coffee-doubleb.github.io/quiz/questions-and-answers-data.json")
 	console.log(error);
 });
 
-
 // message
 const message = document.querySelector(".message");
 const messageContent = document.querySelector(".message__content");
-const messageClose = document.querySelector(".message__close");
+const messageClose = document.querySelector(".message--close");
 
 const messageShow = () => {
 	message.classList.add("message--show");
@@ -51,12 +50,6 @@ const formCheckbox = document.querySelector(".form__checkbox");
 let phoneMask = IMask(formPhone, {
 	mask: "(000) 000-00-00",
 	lazy: false
-});
-
-formPhone.addEventListener("change", function(){
-	if(isNaN(formPhone)){
-		formPhone.style.color = "#000000";
-	}
 });
 
 // quizStart
@@ -130,7 +123,7 @@ let selectAnswer = [];
 // chooseAnswer
 const chooseAnswer = () => {
 	let answerChecked= document.querySelector("input[name='answer']:checked");
-	selectAnswer[numberQuestion] = ++answerChecked.value; 
+	selectAnswer[numberQuestion] = answerChecked.value; 
 }
 
 // createQuestion
@@ -185,7 +178,7 @@ createQuizItem = (index) => {
 	quizItem.insertAdjacentElement("beforeend", quizList);
 
 	for (let i = 0; i < questionsAndAnswers[index].answers.length; i++){
-		let quizListItem = "<li class='quiz__option'><input class='quiz__input' type='radio' name='answer' value=" + i + " id=" + i + "><label class='quiz__label' for=" + i + "><span class='quiz__radio'></span><span class='answer__text'>" + questionsAndAnswers[index].answers[i] + "</span></li>";
+		let quizListItem = "<li class='quiz__option'><input class='quiz__input' type='radio' name='answer' value=" + i + " id=" + i + "><label class='quiz__label' for=" + i + "><span class='quiz__radio'></span><span>" + questionsAndAnswers[index].answers[i] + "</span></li>";
 
 		quizList.insertAdjacentHTML("afterbegin", `${quizListItem}`);
 	}
@@ -195,10 +188,10 @@ createQuizItem = (index) => {
 	return quizItem;
 }
 
-// showCoffeeMachine
-const showCoffeeMachine = () => {
-	document.querySelector(".coffee-machine__left").classList.add("coffee-machine__left--active");
-	document.querySelector(".coffee-machine__right").classList.add("coffee-machine__right--active");
+// showIcon
+const showIcon = () => {
+	document.querySelector(".icon__cup").classList.add("icon__cup--left");
+	document.querySelector(".icon__coffee-machine").classList.add("icon__coffee-machine--right");
 }
 
 // displayResult
@@ -250,7 +243,7 @@ function displayResult() {
 		total.insertAdjacentHTML("afterbegin", "<span class='total__score'>Вы набрали "+correctAnswers+" из "+questionsAndAnswers.length+"</span><span class='total__title'>"+valueFormName+", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>"+sale+"</span><b class='coupon__code'>"+coupon+"</b><svg height='12px'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)' /></svg></div>");
 	}
 
-	showCoffeeMachine();
+	showIcon();
 	displayCoupon();
 
 	return total;
