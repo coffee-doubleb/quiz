@@ -35,7 +35,7 @@ const messageHide = () => {
 	setTimeout(() => {
 		message.classList.remove("message--show");
 		message.classList.remove("message--hide");
-	}, 1000);
+	}, 500);
 }
 
 messageClose.addEventListener("click", () => {
