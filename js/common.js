@@ -122,8 +122,8 @@ let selectAnswer = [];
 
 // chooseAnswer
 const chooseAnswer = () => {
-	let answerChecked= document.querySelector("input[name='answer']:checked");
-	selectAnswer[numberQuestion] = answerChecked.value; 
+	let answerChecked = document.querySelector("input[name='answer']:checked");
+	selectAnswer[numberQuestion] = +answerChecked.value; 
 }
 
 // createQuestion
