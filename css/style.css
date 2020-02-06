@@ -455,7 +455,6 @@
 	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-	color: #757575;
 }
 
 .form__input:focus,
@@ -485,7 +484,6 @@
 
 .form__phone{
 	border-radius: 0 3px 3px 0;
-	color: #757575;
 }
 
 .form__phone:focus{
@@ -531,7 +529,7 @@
 	position: absolute;
 	width: 15px;
 	height: 15px;
-	margin: 2px 0 0 2px;
+	margin: 0 0 0 2px;
 	overflow: hidden;
 	border-radius: 3px;
 	background-color: #FFFFFF;
@@ -898,11 +896,6 @@
 	color: #FFFFFF;
 	background-color: #5EBEBE;
 	border-radius: 3px 3px 0 0;
-}
-
-.total__coupon svg{
-	position: relative;
-	bottom: -1.1px;
 }
 
 .coupon__sale{

@@ -240,7 +240,7 @@ function displayResult() {
 			sale = "Нет скидки, т.к. вы не набрали минимальное (3) количество правильных ответов";
 		}
 
-		total.insertAdjacentHTML("afterbegin", "<span class='total__score'>Вы набрали "+correctAnswers+" из "+questionsAndAnswers.length+"</span><span class='total__title'>"+valueFormName+", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>"+sale+"</span><b class='coupon__code'>"+coupon+"</b><svg height='12px'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)' /></svg></div>");
+		total.insertAdjacentHTML("afterbegin", "<span class='total__score'>Вы набрали "+correctAnswers+" из "+questionsAndAnswers.length+"</span><span class='total__title'>"+valueFormName+", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>"+sale+"</span><b class='coupon__code'>"+coupon+"</b><svg width='100%' height='12px'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)' /></svg></div>");
 	}
 
 	showIcon();
