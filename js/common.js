@@ -101,7 +101,9 @@ const quiz = () => {
 	document.querySelector(".card__content").style.display = "block";
 	document.querySelector(".quiz__btn--start").style.display = "none";
 
-	createQuestion();
+	questionsAndAnswers = [...questionsAndAnswersData];
+
+	createItem();
 }
 
 // quizBtns
@@ -110,7 +112,7 @@ const quizBtnNext = document.querySelector(".quiz__btn--next");
 
 quizBtnPrev.addEventListener("click", () => {
 	numberQuestion--;
-	createQuestion();
+	createItem();
 	chooseAnswer();
 	changeProgress();
 });
@@ -125,7 +127,7 @@ quizBtnNext.addEventListener("click", () => {
 		numberQuestion++;
 
 		if (numberQuestion > 0){
-			createQuestion();
+			createItem();
 		}
 
 		changeProgress();
@@ -150,13 +152,12 @@ const chooseAnswer = () => {
 	}
 }
 
-// createQuestion
-questionsAndAnswers = [...questionsAndAnswersData];
+// createItem
+
 const quizItem = document.querySelector(".quiz__item");
 const quizList = document.querySelector(".quiz__list");
 
-const createQuestion = () => {
-
+const createItem = (index) => {
 	// quiz__content--fade-in
 	quizContent.classList.add("quiz__content--fade-in");
 
@@ -201,9 +202,9 @@ const createQuestion = () => {
 	if (numberQuestion === 0){
 		quizBtnPrev.style.display = "none";
 		quizBtnNext.style.display = "inline-block";
-	} else if (numberQuestion > 0){
+	} else if (numberQuestion > 0 && numberQuestion !== 5){
 		quizBtnPrev.style.display = "inline-block";
-	} else if (numberQuestion === 5){
+	} else if (numberQuestion == 5){
 		quizContent.classList.add("quiz__content--fade-in");
 
 		setTimeout(() => {
