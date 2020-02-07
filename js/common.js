@@ -16,6 +16,24 @@ fetch("https://doubleb-coffee.github.io/quiz/questions-and-answers.json")
 	console.log(error);
 });
 
+// get coupons
+let coupons;
+let couponsData = [];
+
+fetch("https://doubleb-coffee.github.io/quiz/coupons.json")
+
+.then(response => {
+	return response.json();
+})
+
+.then(data => {
+	couponsData = data;
+})
+
+.catch(error => {
+	console.log(error);
+});
+
 // message
 const message = document.querySelector(".message");
 const messageContent = document.querySelector(".message__content");
@@ -63,11 +81,11 @@ const quizStart = () => {
 	if (formName.value == ""){
 		messageContent.innerText = "Впишите имя";
 		messageShow();
-	} else if(formPhone.value == ""){
-		messageContent.innerText = "Напишите номер телефона";
+	} else if(phoneMask._unmaskedValue == ""){
+		messageContent.innerText = "Впишите номер телефона";
 		messageShow();
-	} else if (!formCheckbox.checked == true){
-		messageContent.innerText = "Согласитесь с условиями";
+	} else if (formCheckbox.checked == false){
+		messageContent.innerText = "Согласитесь с конфиденциальностью и правилами";
 		messageShow();
 	} else {	
 		quiz();
@@ -75,12 +93,13 @@ const quizStart = () => {
 }
 
 // quiz
+const quizContent = document.querySelector(".quiz__content");
+let numberQuestion = 0;
+
 const quiz = () => {
 	document.querySelector(".card__preview").style.display = "none";
 	document.querySelector(".card__content").style.display = "block";
 	document.querySelector(".quiz__btn--start").style.display = "none";
-
-	questionsAndAnswers = [...questionsAndAnswersData];
 
 	createQuestion();
 }
@@ -104,7 +123,11 @@ quizBtnNext.addEventListener("click", () => {
 		messageShow();
 	} else {
 		numberQuestion++;
-		createQuestion();
+
+		if (numberQuestion > 0){
+			createQuestion();
+		}
+
 		changeProgress();
 	}
 });
@@ -116,11 +139,9 @@ const changeProgress = () => {
 	progress.style.width = `${(numberQuestion / 5) * 100}%`;
 }
 
-const quizContent = document.querySelector(".quiz__content");
-let numberQuestion = 0;
+// chooseAnswer
 let selectAnswer = [];
 
-// chooseAnswer
 const chooseAnswer = () => {
 	let answerChecked = document.querySelector("input[name='answer']:checked");
 
@@ -130,75 +151,75 @@ const chooseAnswer = () => {
 }
 
 // createQuestion
+questionsAndAnswers = [...questionsAndAnswersData];
+const quizItem = document.querySelector(".quiz__item");
+const quizList = document.querySelector(".quiz__list");
+
 const createQuestion = () => {
-	quizContent.classList.add("quiz__content--fade-out");
+
+	// quiz__content--fade-in
+	quizContent.classList.add("quiz__content--fade-in");
 
 	setTimeout(() => {
-		quizContent.classList.remove("quiz__content--fade-out");
+		quizContent.classList.remove("quiz__content--fade-in");
 	}, 500);
 
-	if(selectAnswer.length !== 0){
-		document.querySelector(".quiz__item").remove();
+	// remove title and question
+	const quizTitle = document.querySelector(".quiz__title");
+	const quizQuestion = document.querySelector(".quiz__question");
+
+	if (quizTitle !== null && quizQuestion !== null){
+		quizTitle.remove();
+		quizQuestion.remove();
 	}
 
-	if (numberQuestion < questionsAndAnswers.length){
-		quizContent.append(createQuizItem(numberQuestion));
+	// remove answers
+	let childQuizList = quizList.lastElementChild; 
 
-		if (!(isNaN(selectAnswer[numberQuestion]))){
-			document.querySelector(`input[value="${selectAnswer[numberQuestion]}"]`).checked = "true";
+	while (childQuizList) { 
+		quizList.removeChild(childQuizList); 
+		childQuizList = quizList.lastElementChild; 
+	} 
+
+	if(questionsAndAnswers[numberQuestion] !== undefined){
+		// add title and question
+		quizItem.insertAdjacentHTML("afterbegin", `<h2 class="quiz__title">Вопрос № ${(numberQuestion + 1)}</h2><p class="quiz__question">${questionsAndAnswers[numberQuestion].question}</p>`);
+
+		// add answers
+		for (let i = 0; i < questionsAndAnswers[numberQuestion].answers.length; i++){
+			let quizListItem = "<li class='quiz__option'><input class='quiz__input' type='radio' name='answer' value=" + i + " id=" + i + "><label class='quiz__label' for=" + i + "><span class='quiz__radio'></span><span>" + questionsAndAnswers[numberQuestion].answers[i] + "</span></label></li>";
+
+			quizList.insertAdjacentHTML("beforeend", `${quizListItem}`);
 		}
+	}
+	
+	// choice of answer in the prev question
+	if (!(isNaN(selectAnswer[numberQuestion]))){
+		document.querySelector(`input[value="${selectAnswer[numberQuestion]}"]`).checked = "true";
+	}
 
-		if (numberQuestion === 1){
-			quizBtnPrev.style.display = "inline-block";
-		} else if (numberQuestion === 0){
-			quizBtnPrev.style.display = "none";
-			quizBtnNext.style.display = "inline-block";
-		}
-
-	} else {
-		quizContent.classList.add("quiz__content--fade-out");
+	if (numberQuestion === 0){
+		quizBtnPrev.style.display = "none";
+		quizBtnNext.style.display = "inline-block";
+	} else if (numberQuestion > 0){
+		quizBtnPrev.style.display = "inline-block";
+	} else if (numberQuestion === 5){
+		quizContent.classList.add("quiz__content--fade-in");
 
 		setTimeout(() => {
-			quizContent.classList.remove("quiz__content--fade-out");
+			quizContent.classList.remove("quiz__content--fade-in");
 		}, 500);
+
+		displayResult();
 
 		quizBtnPrev.style.display = "none";
 		quizBtnNext.style.display = "none";
-
-		quizContent.append(displayResult());
 	}
-}
-
-// createQuizItem
-createQuizItem = (index) => {
-	let quizItem = document.createElement("div");
-	let quizList = document.createElement("ul");
-	quizItem.className = "quiz__item";
-	quizList.className = "quiz__list";
-
-	quizContent.append(quizItem);
-
-	quizItem.insertAdjacentElement("beforeend", quizList);
-
-	for (let i = 0; i < questionsAndAnswers[index].answers.length; i++){
-		let quizListItem = "<li class='quiz__option'><input class='quiz__input' type='radio' name='answer' value=" + i + " id=" + i + "><label class='quiz__label' for=" + i + "><span class='quiz__radio'></span><span>" + questionsAndAnswers[index].answers[i] + "</span></li>";
-
-		quizList.insertAdjacentHTML("afterbegin", `${quizListItem}`);
-	}
-
-	quizItem.insertAdjacentHTML("afterbegin", `<h1 class="quiz__title">Вопрос № ${(index + 1)}</h1><p class="quiz__question">${questionsAndAnswers[index].question}</p>`);
-
-	return quizItem;
-}
-
-// showIcon
-const showIcon = () => {
-	document.querySelector(".icon__cup").classList.add("icon__cup--left");
-	document.querySelector(".icon__coffee-machine").classList.add("icon__coffee-machine--right");
 }
 
 // displayResult
-function displayResult() {
+const displayResult = () => {
+	// count true answer
 	let correctAnswers = 0;
 
 	for (let i = 0; i < selectAnswer.length; i++){
@@ -207,47 +228,29 @@ function displayResult() {
 		}
 	}
 
-	let total = document.createElement("div");
+	// selection coupon
+	coupons = [...couponsData];
+
+	if (correctAnswers == 2){
+		coupon = coupons[0].coupon;
+		sale = coupons[0].sale;
+	} else if (correctAnswers == 3){
+		coupon = coupons[1].coupon;
+		sale = coupons[1].sale;
+	} else if (correctAnswers == 4 || correctAnswers == 5){
+		coupon = coupons[2].coupon;
+		sale = coupons[2].sale;
+	} else {
+		coupon = "Пусто";
+		sale = "Нет скидки, т.к. вы не набрали минимальное (3) количество правильных ответов";
+	}
+
+	// add result
 	let valueFormName = document.querySelector(".form__name").value;
 
-	total.className = "total";
-	quizContent.append(total);
+	quizContent.insertAdjacentHTML("afterbegin", "<div class='total'><span class='total__score'>Вы набрали " + correctAnswers + " из 5</span><span class='total__title'>" + valueFormName + ", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>" + sale + "</span><b class='coupon__code'>" + coupon + "</b><svg width='100%' height='12'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)'/></svg></div></div>");
 
-	const coupons = [
-	{
-		coupon: "DB64699",
-		sale: "5% скидка"
-	},
-	{
-		coupon: "DB52021",
-		sale: "10% скидка"
-	},
-	{
-		coupon: "DB81850",
-		sale: "15% скидка"
-	}
-	];
-
-	const displayCoupon = () => {
-		if (correctAnswers == 2){
-			coupon = coupons[0].coupon;
-			sale = coupons[0].sale;
-		} else if (correctAnswers == 3){
-			coupon = coupons[1].coupon;
-			sale = coupons[1].sale;
-		} else if (correctAnswers == 4 || correctAnswers == 5){
-			coupon = coupons[2].coupon;
-			sale = coupons[2].sale;
-		} else {
-			coupon = "Пусто";
-			sale = "Нет скидки, т.к. вы не набрали минимальное (3) количество правильных ответов";
-		}
-
-		total.insertAdjacentHTML("afterbegin", "<span class='total__score'>Вы набрали "+correctAnswers+" из "+questionsAndAnswers.length+"</span><span class='total__title'>"+valueFormName+", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>"+sale+"</span><b class='coupon__code'>"+coupon+"</b><svg width='100%' height='12'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)' /></svg></div>");
-	}
-
-	showIcon();
-	displayCoupon();
-
-	return total;
+	// show icon
+	document.querySelector(".icon__cup").classList.add("icon__cup--left");
+	document.querySelector(".icon__coffee-machine").classList.add("icon__coffee-machine--right");
 }

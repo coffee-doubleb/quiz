@@ -454,11 +454,11 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	overflow: visible;
-	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-	transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+	-o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
 }
 
 .form__input:focus,
@@ -573,7 +573,7 @@
 	margin-bottom: 15px;
 }
 
-@-webkit-keyframes quizContentFadeOut{
+@-webkit-keyframes quizContentFadeIn{
 	from{
 		opacity: 0;
 	}
@@ -583,7 +583,7 @@
 	}
 }
 
-@keyframes quizContentFadeOut{
+@keyframes quizContentFadeIn{
 	from{
 		opacity: 0;
 	}
@@ -593,9 +593,9 @@
 	}
 }
 
-.quiz__content--fade-out{
-	-webkit-animation: 1s quizContentFadeOut forwards;
-	animation: 1s quizContentFadeOut forwards;
+.quiz__content--fade-in{
+	-webkit-animation: 1s quizContentFadeIn forwards;
+	animation: 1s quizContentFadeIn forwards;
 }
 
 .quiz__item{
