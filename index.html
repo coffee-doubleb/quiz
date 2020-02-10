@@ -1,77 +1,26 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="theme-color" content="#5EBEBE">
-		<meta name="description" content="Даблби, кофейня, кофе, викторина, получение купона">
-		<title>Даблби - Викторина</title>
-		<link rel="shortcut icon" href="img/favicon.png">
-		<!-- critical css -->
-		<style>html,body{height:100%;}body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin:0;font-family:"Catorze27style1",sans-serif;line-height:1;background-color:#757575;background:-o-linear-gradient(top,#FFFFFF,#5EBEBE);background:-webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#5EBEBE));background:linear-gradient(to bottom,#FFFFFF,#5EBEBE);overflow:hidden;}.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:flex-end;width:100%;height:97%;margin:0 10px;background-color:#FFFFFF;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:6px;-webkit-box-shadow:0 0.25rem 0.25rem rgba(0,0,0,0.2),0 0 1rem rgba(0,0,0,0.2);box-shadow:0 0.25rem 0.25rem rgba(0,0,0,0.2),0 0 1rem rgba(0,0,0,0.2);overflow: hidden;}@media(min-width:568px){.card{width:400px;}@media(max-width:320px){.card{height:500px;}</style>
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-		<!-- message -->
-		<div class="message" data-notification-status="plain" role="alert" aria-live="assertive">
-			<svg class="message__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 301.691 301.691" fill="#FFFFFF"><g><polygon points="119.151,0 129.6,218.406 172.06,218.406 182.54,0"></polygon><rect x="130" y="261" width="40.525" height="40.523"></rect></g></svg>
-			<p class="message__content">Text</p>
-			<button class="message--close" aria-label="Закрыть сообщение"><svg fill="#757575" viewBox="0 0 15.642 15.642" width="15"><path d="M8.882,7.821l6.541-6.541c0.293-0.293,0.293-0.768,0-1.061 c-0.293-0.293-0.768-0.293-1.061,0L7.821,6.76L1.28,0.22c-0.293-0.293-0.768-0.293-1.061,0c-0.293,0.293-0.293,0.768,0,1.061 l6.541,6.541L0.22,14.362c-0.293,0.293-0.293,0.768,0,1.061c0.147,0.146,0.338,0.22,0.53,0.22s0.384-0.073,0.53-0.22l6.541-6.541 l6.541,6.541c0.147,0.146,0.338,0.22,0.53,0.22c0.192,0,0.384-0.073,0.53-0.22c0.293-0.293,0.293-0.768,0-1.061L8.882,7.821z"></path></svg></button>
-		</div>
-		<!-- card -->
-		<section class="card">
-			<div class="card__circle"></div>
-			<img class="card__logo" src="img/logo.jpg" alt="Логотип">
-			<svg class="card__bend" viewBox="0 0 800 1000"><path d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 1500 L 0 1000" stroke="none" fill="#FFFFFF"></path><path class="card__line" d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400" fill="none" stroke-width="5"></path></svg>
-			<div class="card__preview">
-				<h1 class="card__title">Викторина</h1>
-				<p class="card__info">Вы перешли по QR-коду, теперь Вам нужно ответить на <b class="card__info--strong">5 вопросов</b>, чтобы получить Ваш купон и заполните, пожалуйста поля для имени и номера телефона (для статистики, никакой рассылки :з )</p>
-				<!-- form -->
-				<form class="card__form form" method="post" action="">
-					<div class="form__field">
-						<input class="form__input form__name" id="name" type="text" required>
-						<label class="form__label" for="name">Имя</label>
-					</div>
-					<div class="form__field">
-						<span class="form__code">+7</span>
-						<input class="form__input form__phone" id="phone" type="tel" placeholder="(___) ___-__-__" required minlength="10">
-						<label class="form__label" for="phone"></label>
-					</div>
-					<label>
-						<input class="form__checkbox" type="checkbox">
-						<span class="form__custom-checkbox"></span>
-						<span class="form__question">Согласны с <a class="form__link" href="documents/rules.pdf" target="_blank">правилами</a> & <a class="form__link" href="documents/confidentiality.pdf" target="_blank">конфиденциальностью</a>?</span>
-					</label>
-				</form>
-				<button class="btn quiz__btn--start" type="submit">Начать</button>
-			</div>
-			<div class="card__content">
-				<!-- quiz -->
-				<div class="quiz">
-					<div class="quiz__icon icon">
-						<div class="icon__cup">
-							<svg viewBox="0 0 470 470" enable-background="new 0 0 470 470" width="100" heght="100"><g><path d="m133.359,295.001c10.548,23.551 34.21,39.999 61.641,39.999 37.22,0 67.5-30.28 67.5-67.5v-25c0-4.142-3.358-7.5-7.5-7.5h-149.126c-2.677,0-5.151,1.427-6.492,3.744-3.286,5.679-5.022,12.165-5.022,18.757 0,20.678 16.822,37.5 37.5,37.5h1.499zm9.141-45.001h105v17.5c0,28.949-23.551,52.5-52.5,52.5s-52.5-23.551-52.5-52.5v-17.5zm-33.14,7.501c0-2.568 0.438-5.106 1.282-7.501h16.858v17.5c0,4.189 0.383,8.289 1.117,12.269-10.875-1.577-19.257-10.962-19.257-22.268z"/></g></svg>
-						</div> 
-						<div class="icon__coffee-machine">
-							<svg viewBox="0 0 470 470" enable-background="new 0 0 470 470" width="100" heght="100"><g><path d="m382.5,120c24.813,0 45-20.187 45-45s-20.187-45-45-45-45,20.187-45,45 20.187,45 45,45zm0-75c16.542,0 30,13.458 30,30s-13.458,30-30,30c-13.953,0-25.712-9.575-29.051-22.5h36.551c4.142,0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-36.551c3.339-12.925 15.098-22.5 29.051-22.5z"/><path d="m142.5,455h-40c-4.142,0-7.5,3.358-7.5,7.5s3.358,7.5 7.5,7.5h40c4.142,0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m447.5,455h-40c-4.142,0-7.5,3.358-7.5,7.5s3.358,7.5 7.5,7.5h40c4.142,0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5z"/><path d="m462.5,0h-375c-4.142,0-7.5,3.358-7.5,7.5v75c0,20.678 16.822,37.5 37.5,37.5h22.5v30h-15v-7.5c0-3.944-3.055-7.214-6.99-7.482l-110-7.5c-2.072-0.145-4.112,0.583-5.63,2.002-1.518,1.418-2.38,3.402-2.38,5.48v45c0,2.078 0.862,4.063 2.38,5.48 1.394,1.302 3.225,2.02 5.119,2.02 0.17,0 0.34-0.006 0.511-0.018l110-7.5c3.935-0.268 6.99-3.538 6.99-7.482v-7.5h16.29c3.096,8.729 11.432,15 21.21,15h25v12.5c0,4.142 3.358,7.5 7.5,7.5s7.5-3.358 7.5-7.5v-12.5h25c12.407,0 22.5-10.093 22.5-22.5v-37.5h45v230h-177.5c-20.678,0-37.5,16.822-37.5,37.5v45c0,4.142 3.358,7.5 7.5,7.5h375c4.142,0 7.5-3.358 7.5-7.5v-425c0-4.142-3.358-7.5-7.5-7.5zm-352.5,165.494l-95,6.477v-28.942l95,6.477v15.988zm125-7.994c0,4.136-3.364,7.5-7.5,7.5h-65c-4.136,0-7.5-3.364-7.5-7.5v-37.5h80v37.5zm220,267.5h-360v-37.5c0-12.407 10.093-22.5 22.5-22.5h177.5v37.5c0,4.142 3.358,7.5 7.5,7.5s7.5-3.358 7.5-7.5v-290c0-4.142-3.358-7.5-7.5-7.5h-185c-12.407,0-22.5-10.093-22.5-22.5v-67.5h360v410z"/><circle cx="352.5" cy="357.5" r="7.5"/><circle cx="352.5" cy="312.5" r="7.5"/><circle cx="352.5" cy="267.5" r="7.5"/></g></svg>
-						</div>
-					</div>
-					<div class="quiz__content">
-						<div class="quiz__item">
-							<ul class="quiz__list">
-							</ul>
-						</div>
-					</div>
-					<div class="quiz__btns">
-						<button class="btn quiz__btn--prev" id="prev">Назад</button>
-						<button class="btn quiz__btn--next" id="next">Далее</button>
-					</div>
-				</div>
-			</div>
-			<div class="progress" id="progress"></div>
-		</section>
-		<script src="js/imask.min.js"></script>
-		<script src="js/common.js"></script>
-	</body>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="theme-color" content="#5EBEBE">
+	<meta name="description" content="Даблби, кофейня, кофе, викторина, получение купона">
+	<title>Даблби - Викторина</title>
+	<link rel="shortcut icon" href="img/favicon.png">
+	<!-- critical css -->
+	<style>html,body{height:100%;}body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin:0;font-family:"Catorze27style1",sans-serif;line-height:1;background-color:#757575;background:-o-linear-gradient(top,#FFFFFF,#5EBEBE);background:-webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#5EBEBE));background:linear-gradient(to bottom,#FFFFFF,#5EBEBE);overflow:hidden;}.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:flex-end;width:100%;height:97%;margin:0 10px;background-color:#FFFFFF;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:6px;-webkit-box-shadow:0 0.25rem 0.25rem rgba(0,0,0,0.2),0 0 1rem rgba(0,0,0,0.2);box-shadow:0 0.25rem 0.25rem rgba(0,0,0,0.2),0 0 1rem rgba(0,0,0,0.2);overflow: hidden;}@media(min-width:568px){.card{width:400px;}@media(max-width:320px){.card{height:500px;}</style>
+	<link rel="stylesheet" href="css/preview.css">
+</head>
+<body>
+	<!-- card -->
+	<section class="card card--preview">
+		<img class="card__img" src="img/preview.jpg" alt="">
+		<h1 class="card__title">Викторина от даблби</h1>
+		<p class="card__info">Вы перешли по QR-коду, теперь Вам нужно ответить на <b class="card__info--strong">5 вопросов</b>, чтобы получить Ваш купон и заполните, пожалуйста поля для имени и номера телефона (для статистики, никакой рассылки :з )</p>
+		<a class="card__link" href="quiz.html">Перейти к викторине</a>
+	</section>
+	<script src="js/imask.min.js"></script>
+	<script src="js/common.js"></script>
+</body>
 </html>

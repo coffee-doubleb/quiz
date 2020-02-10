@@ -77,6 +77,10 @@ quizBtnStart.addEventListener("click", () =>{
 	quizStart();
 });
 
+// else if (localStorage.quiz == "passed"){
+// 	messageContent.innerText = "Вы уже получили свой купон";
+// }
+
 const quizStart = () => {
 	if (formName.value == ""){
 		messageContent.innerText = "Впишите имя";
@@ -87,7 +91,7 @@ const quizStart = () => {
 	} else if (formCheckbox.checked == false){
 		messageContent.innerText = "Согласитесь с конфиденциальностью и правилами";
 		messageShow();
-	} else {	
+	}else {	
 		quiz();
 	}
 }
@@ -220,6 +224,9 @@ const createItem = (index) => {
 
 // displayResult
 const displayResult = () => {
+	// show social
+	document.querySelector(".social").classList.remove("social--hide");
+
 	// count true answer
 	let correctAnswers = 0;
 
@@ -249,9 +256,11 @@ const displayResult = () => {
 	// add result
 	let valueFormName = document.querySelector(".form__name").value;
 
-	quizContent.insertAdjacentHTML("afterbegin", "<div class='total'><span class='total__score'>Вы набрали " + correctAnswers + " из 5</span><span class='total__title'>" + valueFormName + ", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>" + sale + "</span><b class='coupon__code'>" + coupon + "</b><svg width='100%' height='12'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)'/></svg></div></div>");
+	quizContent.insertAdjacentHTML("afterbegin", "<div class='total'><span class='total__score'>Вы набрали " + correctAnswers + " из 5</span><span class='total__title'>" + valueFormName + ", Ваш купон:</span><div class='total__coupon coupon'><span class='coupon__sale'>" + sale + "</span><b class='coupon__code'>" + coupon + "</b><svg class='coupon__pattern' width='100%' height='12'><defs><pattern id='coupon__dots' width='22' height='22' patternUnits='userSpaceOnUse'><circle cy='13' cx='9' r='7' fill='#FFFFFF' /></pattern></defs><rect width='100%' height='22px' fill='url(#coupon__dots)'/></svg></div></div>");
 
 	// show icon
 	document.querySelector(".icon__cup").classList.add("icon__cup--left");
 	document.querySelector(".icon__coffee-machine").classList.add("icon__coffee-machine--right");
+
+	localStorage.setItem("quiz", "passed");
 }
