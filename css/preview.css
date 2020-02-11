@@ -43,7 +43,7 @@
 .card__img{
 	width: 130px;
 	height: 130px;
-	margin-top: 30px;
+	margin: 20px 0 15px 0;
 }
 
 .preview__title{
