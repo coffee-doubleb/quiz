@@ -62,6 +62,7 @@ messageClose.addEventListener("click", () => {
 
 // form
 const formName = document.querySelector(".form__name");
+const formEmail = document.querySelector(".form__email");
 const formPhone = document.querySelector(".form__phone");
 const formCheckbox = document.querySelector(".form__checkbox");
 
@@ -85,13 +86,16 @@ const quizStart = () => {
 	if (formName.value == ""){
 		messageContent.innerText = "Впишите имя";
 		messageShow();
-	} else if(phoneMask._unmaskedValue == ""){
+	} else if (formEmail.value == ""){
+		messageContent.innerText = "Введите E-mail";
+		messageShow();
+	} else if (phoneMask._unmaskedValue == ""){
 		messageContent.innerText = "Впишите номер телефона";
 		messageShow();
 	} else if (formCheckbox.checked == false){
 		messageContent.innerText = "Согласитесь с конфиденциальностью и правилами";
 		messageShow();
-	}else {	
+	} else {	
 		quiz();
 	}
 }

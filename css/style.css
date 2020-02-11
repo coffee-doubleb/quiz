@@ -467,10 +467,11 @@
 }
 
 .form__input:focus + .form__label,
+.form__input:not(:placeholder-shown) + .form__label,
 .form__input:valid + .form__label {
 	opacity: 1;
-	-webkit-transform: scale(0.8) translate(-5px, -15px);
-	-ms-transform: scale(0.8) translate(-5px, -15px);
+	/*-webkit-transform: scale(0.8) translate(-5px, -15px);*/
+	/*-ms-transform: scale(0.8) translate(-5px, -15px);*/
 	transform: scale(0.8) translate(-5px, -15px);
 }
 

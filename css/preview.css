@@ -45,18 +45,24 @@
 	background-color: #FFFFFF;
 }
 
+@media (max-width: 991px){
+	.card__info{
+		margin: 0 15px 5em 15px;
+	}
+}
+
 .card__info--strong{
 	display: inline-block;
 	font-weight: bold;
 }
 
 @media(min-width:568px){
-	.card--preview{
-		width:600px;
+	.preview{
+		width: 600px;
 	}
 }
 
-.card--preview{
+.preview{
 	-webkit-box-pack: start;
 	-ms-flex-pack: start;
 	justify-content: flex-start;
@@ -66,6 +72,25 @@
 	width: 100%;
 	margin-bottom: 5em; 
 }
+
+.preview__title{
+	margin: 0 0 15px 0;
+	font-size: 2em;
+	color: #495057;
+}
+
+
+.preview__subtitle{
+	margin: 0 0 15px 0;
+	color: #495057;
+}
+
+.preview__paragraph{
+	margin: 0 0 5px 0;
+	text-indent: 15px;
+	text-align: justify;
+}
+
 
 .card__link{
 	text-decoration: none;
