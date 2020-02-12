@@ -40,6 +40,7 @@ const messageContent = document.querySelector(".message__content");
 const messageClose = document.querySelector(".message--close");
 
 const messageShow = () => {
+	message.style.display = "flex";
 	message.classList.add("message--show");
 
 	setTimeout(() => {
@@ -48,12 +49,8 @@ const messageShow = () => {
 }
 
 const messageHide = () => {
-	message.classList.add("message--hide");
-
-	setTimeout(() => {
-		message.classList.remove("message--show");
-		message.classList.remove("message--hide");
-	}, 500);
+	message.style.display = "none";
+	message.classList.remove("message--show");
 }
 
 messageClose.addEventListener("click", () => {
@@ -165,7 +162,7 @@ const chooseAnswer = () => {
 const quizItem = document.querySelector(".quiz__item");
 const quizList = document.querySelector(".quiz__list");
 
-const createItem = (index) => {
+const createItem = () => {
 	// quiz__content--fade-in
 	quizContent.classList.add("quiz__content--fade-in");
 
@@ -243,18 +240,49 @@ const displayResult = () => {
 	// selection coupon
 	coupons = [...couponsData];
 
-	if (correctAnswers == 2){
-		coupon = coupons[0].coupon;
-		sale = coupons[0].sale;
-	} else if (correctAnswers == 3){
-		coupon = coupons[1].coupon;
-		sale = coupons[1].sale;
-	} else if (correctAnswers == 4 || correctAnswers == 5){
-		coupon = coupons[2].coupon;
+	let a = 2 + 2;
+
+	switch (correctAnswers) {
+		case 5:
+		sale = coupons[3].sale;
+		coupon = coupons[3].coupon;
+		break;
+		case 4:
 		sale = coupons[2].sale;
-	} else {
+		coupon = coupons[2].coupon;
+		break;
+		case 3:
+		sale = coupons[1].sale;
+		coupon = coupons[1].coupon;
+		case 2:
+		sale = coupons[0].sale;
+		coupon = coupons[0].coupon;
+		break;
+		case 1:
+		sale = "Вы дали только 1 правильный ответ. Стоит выпить чашечку эспрессо и начать сначала, попробуете ещё раз?";
 		coupon = "Пусто";
-		sale = "Нет скидки, т.к. вы не набрали минимальное (3) количество правильных ответов";
+
+		document.querySelector(".quiz__btns").insertAdjacentHTML("afterbegin", "<button class='btn btn--restart'>Начать сначала</button>");
+
+		const btnRestart = document.querySelector(".btn--restart");
+
+		btnRestart.addEventListener("click", function(){
+			document.querySelector(".total").remove();
+
+			// hide icon
+			document.querySelector(".icon__cup").classList.remove("icon__cup--left");
+			document.querySelector(".icon__coffee-machine").classList.remove("icon__coffee-machine--right");
+
+			btnRestart.remove();
+
+			//hide social
+			document.querySelector(".social").classList.add("social--hide");
+
+			selectAnswer = [];
+			numberQuestion = 0;
+			createItem();
+			changeProgress();
+		});
 	}
 
 	// add result
